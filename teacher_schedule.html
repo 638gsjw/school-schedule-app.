@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>جدول المعلم</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+      text-align: center;
+    }
+    .welcome {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #0072ff;
+    }
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #0072ff;
+      color: white;
+    }
+    td {
+      font-size: 16px;
+    }
+    .subjects {
+      margin: 20px auto;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="welcome" id="welcomeMessage">مرحبًا بالمعلم</div>
+  <div class="subjects" id="subjectsList">موادك: </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>اليوم</th>
+        <th>الحصة الأولى</th>
+        <th>الحصة الثانية</th>
+        <th>الحصة الثالثة</th>
+        <th>الحصة الرابعة</th>
+      </tr>
+    </thead>
+    <tbody id="scheduleBody">
+      <!-- يتم تعبئته بالجافاسكربت -->
+    </tbody>
+  </table>
+
+  <script>
+    // اسم المعلم المخزن من صفحة تسجيل الدخول
+    const teacherName = localStorage.getItem("teacherName") || "المعلم";
+
+    // جدول لكل معلم - مثال مفضل يدرّس صفين ومادتين
+    const teacherSchedules = {
+      "مفضل عبد الملك": {
+        subjects: ["رياضيات - خامس", "علوم - سادس"],
+        schedule: {
+          "الأحد":    ["رياضيات - خامس", "علوم - سادس", "فراغ", "رياضيات - خامس"],
+          "الإثنين":  ["فراغ", "علوم - سادس", "علوم - سادس", "فراغ"],
+          "الثلاثاء": ["رياضيات - خامس", "فراغ", "رياضيات - خامس", "علوم - سادس"],
+          "الأربعاء": ["علوم - سادس", "رياضيات - خامس", "فراغ", "فراغ"],
+          "الخميس":   ["فراغ", "رياضيات - خامس", "علوم - سادس", "فراغ"]
+        }
+      },
+      "أحمد محمد": {
+        subjects: ["لغة عربية - أول", "قراءة - ثاني"],
+        schedule: {
+          "الأحد":    ["لغة عربية - أول", "قراءة - ثاني", "فراغ", "فراغ"],
+          "الإثنين":  ["فراغ", "لغة عربية - أول", "قراءة - ثاني", "قراءة - ثاني"],
+          "الثلاثاء": ["قراءة - ثاني", "لغة عربية - أول", "فراغ", "فراغ"],
+          "الأربعاء": ["لغة عربية - أول", "فراغ", "فراغ", "قراءة - ثاني"],
+          "الخميس":   ["فراغ", "قراءة - ثاني", "لغة عربية - أول", "فراغ"]
+        }
+      }
+    };
+
+    // عرض اسم المعلم
+    document.getElementById("welcomeMessage").innerText = "مرحبًا أ. " + teacherName;
+
+    // عرض المواد
+    const subjects = teacherSchedules[teacherName]?.subjects || ["لا توجد مواد"];
+    document.getElementById("subjectsList").innerText = "موادك: " + subjects.join("، ");
+
+    // عرض الجدول
+    const tbody = document.getElementById("scheduleBody");
+    const schedule = teacherSchedules[teacherName]?.schedule || {};
+
+    for (let day in schedule) {
+      const row = document.createElement("tr");
+      const dayCell = document.createElement("td");
+      dayCell.innerText = day;
+      row.appendChild(dayCell);
+
+      schedule[day].forEach(period => {
+        const cell = document.createElement("td");
+        cell.innerText = period;
+        row.appendChild(cell);
+      });
+
+      tbody.appendChild(row);
+    }
+  </script>
+
+</body>
+</html>

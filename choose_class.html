@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>جدول الطالب</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      background: white;
+      color: black;
+      border-radius: 20px;
+      padding: 30px;
+      width: 300px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 90%;
+      border-radius: 10px;
+      border: 1px solid #0072ff;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>مرحبًا بك في جدول الطالب</h2>
+    <p>أدخل اسمك وفصلك لعرض الجدول</p>
+    <input type="text" id="studentName" placeholder="اكتب اسمك">
+    <input type="text" id="studentClass" placeholder="اكتب فصلك (مثل: أول أ)">
+    <button onclick="showSchedule()">عرض الجدول</button>
+  </div>
+
+  <div class="footer">
+    تصميم وإعداد: مفضل عبد الملك الشرعبي، بكالوريوس جامعة تعز، تقني معلومات
+  </div>
+
+  <script>
+    function showSchedule() {
+      let name = document.getElementById("studentName").value;
+      let studentClass = document.getElementById("studentClass").value;
+
+      if (name.trim() === "" || studentClass.trim() === "") {
+        alert("من فضلك املأ الاسم والفصل.");
+        return;
+      }
+
+      localStorage.setItem("studentName", name);
+      localStorage.setItem("studentClass", studentClass);
+      window.location.href = "student_schedule.html";
+    }
+  </script>
+</body>
+</html>

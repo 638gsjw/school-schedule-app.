@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إدارة المعلمين - حساب المدير</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #e3f2fd;
+      text-align: center;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #0d47a1;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #0d47a1;
+      width: 300px;
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #0d47a1;
+    }
+    #teachersList {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #90caf9;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: right;
+    }
+    .teacherItem {
+      background-color: #bbdefb;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .deleteBtn {
+      background: #d32f2f;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #0d47a1;
+    }
+    #formSection {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>إدارة المعلمين</h1>
+
+  <button onclick="toggleForm()">➕ إنشاء/إدراج معلم جديد</button>
+
+  <div id="formSection">
+    <label>اسم المعلم:</label>
+    <input type="text" id="teacherName" placeholder="مثال: الأستاذ أحمد" />
+
+    <label>المواد التي يدرسها (افصل بين المواد بفاصلة):</label>
+    <input type="text" id="teacherSubjects" placeholder="مثلاً: رياضيات، فيزياء، كيمياء" />
+
+    <label>الفصول التي يدرسها (افصل بين الفصول بفاصلة):</label>
+    <input type="text" id="teacherClasses" placeholder="مثلاً: أول ثانوي، ثاني ثانوي" />
+
+    <button onclick="addTeacher()">✅ إضافة معلم</button>
+  </div>
+
+  <div id="teachersList">
+    <h2>قائمة المعلمين:</h2>
+    <div id="teachersContainer"></div>
+  </div>
+
+  <script>
+    let teachers = [
+      { name: "الأستاذ عبد الملك", subjects: ["اللغة العربية", "الرياضيات", "القرآن الكريم", "التربية الإسلامية"], classes: ["الأول الثانوي", "الثاني الثانوي", "الثالث الثانوي"] },
+      { name: "الأستاذ صلاح الدين", subjects: ["المجتمع"], classes: ["الأول الثانوي"] },
+      { name: "الأستاذ منير", subjects: ["الاجتماعيات", "التاريخ", "الجغرافيا"], classes: ["الرابع", "الأول الثانوي"] },
+      { name: "الأستاذة عناية", subjects: ["الرياضيات", "الفيزياء", "الأحياء", "الكيمياء"], classes: ["الأول الثانوي", "الثاني الثانوي", "الثالث الثانوي"] },
+      { name: "الأستاذ مهيوب", subjects: ["الكيمياء"], classes: ["الأول الثانوي"] },
+      { name: "الأستاذ مهيوب حسان", subjects: ["العلوم"], classes: ["الخامس", "السادس", "السابع", "الثامن", "التاسع"] },
+      { name: "الأستاذ سامي", subjects: ["اللغة الإنجليزية"], classes: ["الثامن", "التاسع", "الأول الثانوي", "الثاني الثانوي", "الثالث الثانوي"] },
+      { name: "الأستاذة ابتهال", subjects: ["اللغة العربية", "العلوم", "اللغة الإنجليزية"], classes: ["الرابع", "الخامس", "السابع"] },
+      { name: "الأستاذ رزار", subjects: ["القرآن الكريم", "التربية الإسلامية"], classes: ["الرابع", "الخامس", "السادس"] },
+      { name: "الأستاذ عبد الله", subjects: ["القرآن الكريم", "التربية الإسلامية"], classes: ["السابع", "الثامن", "التاسع"] },
+      { name: "الأستاذ عبد الرقيب", subjects: ["اللغة العربية", "الرياضيات"], classes: ["الرابع", "الخامس", "السادس", "السابع"] },
+      { name: "الأستاذة عبير", subjects: ["اللغة العربية"], classes: ["السادس"] },
+      { name: "الأستاذ فائد دبوان", subjects: ["اللغة العربية", "الاجتماعيات"], classes: ["الخامس", "السادس", "الثامن", "التاسع"] },
+      { name: "الأستاذ مختار حميد", subjects: ["الرياضيات"], classes: ["السابع", "الثامن"] }
+    ];
+
+    function toggleForm() {
+      const form = document.getElementById('formSection');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function addTeacher() {
+      let name = document.getElementById('teacherName').value.trim();
+      let subjects = document.getElementById('teacherSubjects').value.trim();
+      let classes = document.getElementById('teacherClasses').value.trim();
+
+      if (!name) {
+        alert('يرجى إدخال اسم المعلم');
+        return;
+      }
+
+      if (teachers.some(t => t.name === name)) {
+        alert('هذا المعلم موجود بالفعل');
+        return;
+      }
+
+      let subjectsArr = subjects ? subjects.split(',').map(s => s.trim()) : [];
+      let classesArr = classes ? classes.split(',').map(c => c.trim()) : [];
+
+      teachers.push({ name, subjects: subjectsArr, classes: classesArr });
+      displayTeachers();
+      clearInputs();
+    }
+
+    function displayTeachers() {
+      let container = document.getElementById('teachersContainer');
+      container.innerHTML = '';
+      teachers.forEach((teacher, idx) => {
+        container.innerHTML += `
+          <div class="teacherItem">
+            <div>
+              <strong>${teacher.name}</strong><br>
+              المواد: ${teacher.subjects.join(', ')}<br>
+              الفصول: ${teacher.classes.join(', ')}
+            </div>
+            <button class="deleteBtn" onclick="removeTeacher(${idx})">×</button>
+          </div>
+        `;
+      });
+    }
+
+    function removeTeacher(index) {
+      if (confirm('هل أنت متأكد أنك تريد حذف هذا المعلم؟')) {
+        teachers.splice(index, 1);
+        displayTeachers();
+      }
+    }
+
+    function clearInputs() {
+      document.getElementById('teacherName').value = '';
+      document.getElementById('teacherSubjects').value = '';
+      document.getElementById('teacherClasses').value = '';
+    }
+
+    // عرض المعلمين عند تحميل الصفحة
+    window.onload = function () {
+      displayTeachers();
+    }
+  </script>
+
+  <br />
+  <p><strong>تصميم وإعداد: مفضل عبد الملك الشرعبي – جامعة تعز – تقني معلومات</strong></p>
+
+</body>
+</html>

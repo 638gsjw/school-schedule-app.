@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة تحكم المدير</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #e3f2fd;
+      margin: 0;
+      padding: 20px;
+      color: #0d47a1;
+      text-align: center;
+    }
+    header {
+      background-color: #1565c0;
+      color: white;
+      padding: 20px 0;
+      font-size: 28px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .welcome {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    .count-box {
+      background-color: #42a5f5;
+      color: white;
+      font-size: 24px;
+      padding: 15px 0;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      font-weight: bold;
+    }
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      flex: 1 1 200px;
+      max-width: 220px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0d47a1;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    لوحة تحكم المدير
+  </header>
+
+  <div class="welcome">
+    مرحبًا بك، <strong>مدير المدرسة</strong>
+  </div>
+
+  <div class="count-box" id="studentCount">
+    عدد الطلاب المسجلين: 0
+  </div>
+
+  <div class="buttons-container">
+    <button onclick="alert('إدارة الصفوف')">إدارة الصفوف</button>
+    <button onclick="alert('إدارة المعلمين')">إدارة المعلمين</button>
+    <button onclick="alert('إنشاء جدول الحصص')">إنشاء جدول الحصص</button>
+    <button onclick="alert('إدارة الإجازات والعطل')">إدارة الإجازات والعطل</button>
+    <button onclick="alert('إرسال الإشعارات')">إرسال الإشعارات</button>
+    <button onclick="alert('عرض التقارير')">عرض التقارير</button>
+  </div>
+
+  <footer>
+    تصميم وإعداد: مفضل عبد الملك الشرعبي – جامعة تعز – تقني معلومات
+  </footer>
+
+<script>
+  // جلب بيانات الطلاب من localStorage (مثال)
+  const students = JSON.parse(localStorage.getItem('students') || '[]');
+
+  // تحديث عرض عدد الطلاب
+  document.getElementById('studentCount').textContent = `عدد الطلاب المسجلين: ${students.length}`;
+</script>
+
+</body>
+</html>

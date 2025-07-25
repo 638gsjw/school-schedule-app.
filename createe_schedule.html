@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إنشاء جدول الحصص - المدير</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #e8f0fe;
+      margin: 0;
+      padding: 20px;
+      color: #003366;
+      text-align: center;
+    }
+    h1 {
+      color: #004aad;
+    }
+    select, button {
+      font-size: 16px;
+      padding: 8px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #004aad;
+      min-width: 150px;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 95%;
+      max-width: 900px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #004aad;
+      padding: 12px 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #004aad;
+      color: white;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>لوحة إنشاء جدول الحصص - المدير</h1>
+
+  <label for="gradeSelect">اختر الصف الدراسي:</label>
+  <select id="gradeSelect"></select>
+
+  <table>
+    <thead>
+      <tr>
+        <th>اليوم \ الحصة</th>
+        <th>الحصة 1</th>
+        <th>الحصة 2</th>
+        <th>الحصة 3</th>
+        <th>الحصة 4</th>
+        <th>الحصة 5</th>
+        <th>الحصة 6</th>
+      </tr>
+    </thead>
+    <tbody id="scheduleBody">
+      <!-- جدول الحصص سيظهر هنا -->
+    </tbody>
+  </table>
+
+  <button onclick="saveSchedule()">حفظ الجدول</button>
+
+  <div class="footer">
+    تصميم وإعداد: مفضل عبد الملك الشرعبي – جامعة تعز – تقني معلومات
+  </div>
+
+<script>
+  // بيانات الصفوف (ممكن تعديل أو جلب من قاعدة بيانات)
+  const grades = [
+    "الصف الأول ابتدائي",
+    "الصف الثاني ابتدائي",
+    "الصف الثالث ابتدائي",
+    "الصف الرابع ابتدائي",
+    "الصف الخامس ابتدائي",
+    "الصف السادس ابتدائي",
+    "الصف السابع",
+    "الصف الثامن",
+    "الصف التاسع",
+    "الصف الأول ثانوي",
+    "الصف الثاني ثانوي",
+    "الصف الثالث ثانوي"
+  ];
+
+  // المواد المتاحة (ممكن تعديلها)
+  const subjects = [
+    "قرآن كريم", "لغة عربية", "رياضيات", "علوم", "لغة إنجليزية",
+    "أحياء", "جغرافيا", "تاريخ", "فيزياء", "اجتماعيات", "حاسوب"
+  ];
+
+  // المعلمين (ممكن تعديلها أو جلبها من مدير)
+  const teachers = [
+    "أحمد محمد", "خالد سعيد", "مفضل عبد الملك", "سلمان علي", "منى أحمد"
+  ];
+
+  // أيام الأسبوع (السبت إلى الأربعاء)
+  const days = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء"];
+
+  // تعبئة قائمة الصفوف
+  const gradeSelect = document.getElementById("gradeSelect");
+  grades.forEach(g => {
+    const option = document.createElement("option");
+    option.value = g;
+    option.textContent = g;
+    gradeSelect.appendChild(option);
+  });
+
+  // إنشاء صفوف الجدول (كل يوم × 6 حصص)
+  function createScheduleRows() {
+    const tbody = document.getElementById("scheduleBody");
+    tbody.innerHTML = "";
+
+    days.forEach(day => {
+      const tr = document.createElement("tr");
+
+      // عمود اليوم
+      const tdDay = document.createElement("td");
+      tdDay.textContent = day;
+      tdDay.style.fontWeight = "bold";
+      tr.appendChild(tdDay);
+
+      // الحصص
+      for (let i = 1; i <= 6; i++) {
+        const td = document.createElement("td");
+
+        // اختيار المادة
+        const subjectSelect = document.createElement("select");
+        subjects.forEach(sub => {
+          const option = document.createElement("option");
+          option.value = sub;
+          option.textContent = sub;
+          subjectSelect.appendChild(option);
+        });
+        td.appendChild(subjectSelect);
+
+        td.appendChild(document.createElement("br"));
+
+        // اختيار المعلم
+        const teacherSelect = document.createElement("select");
+        teachers.forEach(teacher => {
+          const option = document.createElement("option");
+          option.value = teacher;
+          option.textContent = teacher;
+          teacherSelect.appendChild(option);
+        });
+        td.appendChild(teacherSelect);
+
+        tr.appendChild(td);
+      }
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  createScheduleRows();
+
+  // حفظ الجدول في localStorage مع اسم الصف المختار
+  function saveSchedule() {
+    const selectedGrade = gradeSelect.value;
+    const scheduleData = {};
+
+    const tbody = document.getElementById("scheduleBody");
+    const rows = tbody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+      const day = row.children[0].textContent;
+      scheduleData[day] = [];
+
+      for (let i = 1; i <= 6; i++) {
+        const cell = row.children[i];
+        const subject = cell.children[0].value;
+        const teacher = cell.children[2].value;
+        scheduleData[day].push({ subject, teacher });
+      }
+    });
+
+    // تخزين البيانات باسم الصف
+    localStorage.setItem("schedule_" + selectedGrade, JSON.stringify(scheduleData));
+    alert("تم حفظ الجدول للصف: " + selectedGrade);
+  }
+
+</script>
+
+</body>
+</html>

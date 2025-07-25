@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>جدول المعلم</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f0f8ff;
+      padding: 30px;
+      text-align: center;
+      color: #003366;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .filter-buttons {
+      margin: 20px 0;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f99;
+    }
+
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #009688;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #009688;
+      color: white;
+    }
+
+    td {
+      background-color: #e0f7fa;
+    }
+
+    #counter {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📘 جدول المعلم</h2>
+  <h3 id="teacherDisplay"></h3>
+
+  <div class="filter-buttons">
+    <button onclick="filterTable('day')">📅 عرض يوم</button>
+    <button onclick="filterTable('week')">🗓️ عرض أسبوع</button>
+    <button onclick="filterTable('month')">📆 عرض شهر</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>اليوم</th>
+        <th>الحصة</th>
+        <th>الصف</th>
+        <th>المادة</th>
+        <th>المعلم</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div id="counter">📌 عدد الحصص: 0</div>
+
+  <script>
+    const teacherName = localStorage.getItem("teacherName");
+    if (!teacherName) {
+      window.location.href = "teacher_login.html";
+    }
+
+    document.getElementById("teacherDisplay").textContent = `المعلم: ${teacherName}`;
+
+    const scheduleData = [
+      { day: 'الأحد', period: 'الأولى', class: 'سادس أ', subject: 'علوم', teacher: 'مهيوب حسان' },
+      { day: 'الأحد', period: 'الثانية', class: 'ثاني ب', subject: 'رياضيات', teacher: 'عبد الرقيب' },
+      { day: 'الاثنين', period: 'الأولى', class: 'سابع', subject: 'علوم', teacher: 'مهيوب حسان' },
+      { day: 'الثلاثاء', period: 'الثانية', class: 'ثامن', subject: 'كيمياء', teacher: 'مهيوب' },
+      { day: 'الأربعاء', period: 'الثالثة', class: 'تاسع', subject: 'علوم', teacher: 'مهيوب حسان' },
+      { day: 'الخميس', period: 'الرابعة', class: 'أول ثانوي', subject: 'كيمياء', teacher: 'مهيوب' },
+      { day: 'الخميس', period: 'الخامسة', class: 'ثالث ثانوي', subject: 'كيمياء', teacher: 'مهيوب' },
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+    const counter = document.getElementById("counter");
+
+    function displayTable(filteredData) {
+      tableBody.innerHTML = '';
+      filteredData.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.day}</td>
+          <td>${row.period}</td>
+          <td>${row.class}</td>
+          <td>${row.subject}</td>
+          <td>${row.teacher}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      counter.textContent = `📌 عدد الحصص: ${filteredData.length}`;
+    }
+
+    function filterTable(type) {
+      const today = new Date();
+      let filtered = scheduleData.filter(item => item.teacher === teacherName);
+
+      if (type === 'day') {
+        const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'];
+        const currentDay = days[today.getDay() - 1];
+        filtered = filtered.filter(item => item.day === currentDay);
+      }
+
+      displayTable(filtered);
+    }
+
+    // عرض أسبوعي افتراضيًا
+    filterTable('week');
+  </script>
+
+</body>
+</html>

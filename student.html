@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دخول الطالب</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #6ebaff, #cce5ff);
+      font-family: 'Cairo', sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #003366;
+    }
+    h2 {
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+    input {
+      width: 300px;
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      background-color: #004aad;
+      color: white;
+      font-size: 20px;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #003580;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>👨‍🎓 مرحبًا بك أيها الطالب</h2>
+  <p>الرجاء إدخال اسمك واسم فصلك مرة واحدة فقط:</p>
+
+  <input type="text" id="studentName" placeholder="اكتب اسمك">
+  <br>
+  <input type="text" id="studentClass" placeholder="اكتب اسم فصلك (مثل: ثاني ب)">
+  <br>
+  <button onclick="saveStudent()">دخول</button>
+
+  <script>
+    // إذا تم الحفظ مسبقًا، انتقل مباشرة
+    if(localStorage.getItem("studentName") && localStorage.getItem("studentClass")){
+      window.location.href = "student_schedule.html";
+    }
+
+    function saveStudent(){
+      let name = document.getElementById("studentName").value;
+      let studentClass = document.getElementById("studentClass").value;
+
+      if(name && studentClass){
+        localStorage.setItem("studentName", name);
+        localStorage.setItem("studentClass", studentClass);
+        alert("تم الحفظ بنجاح، سيتم نقلك إلى جدولك.");
+        window.location.href = "student_schedule.html";
+      } else {
+        alert("يرجى إدخال الاسم والفصل");
+      }
+    }
+  </script>
+
+</body>
+</html>

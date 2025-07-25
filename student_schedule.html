@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>جدول الحصص للطالب</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f8ff;
+      direction: rtl;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    label {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      margin: 10px 0;
+      border: 1px solid #007BFF;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #007BFF;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #e6f0ff;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  جدول الحصص الأسبوعي للطالب
+</header>
+
+<main>
+  <label for="studentName">ادخل اسمك:</label>
+  <input type="text" id="studentName" placeholder="مثال: أحمد محمد">
+  <button onclick="showTable()">عرض الجدول</button>
+
+  <div id="message"></div>
+
+  <table id="scheduleTable" style="display:none;">
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة الأولى</th>
+      <th>الحصة الثانية</th>
+      <th>الحصة الثالثة</th>
+      <th>الحصة الرابعة</th>
+      <th>الحصة الخامسة</th>
+      <th>الحصة السادسة</th>
+    </tr>
+    <tr>
+      <td>السبت</td>
+      <td>قرآن</td>
+      <td>لغة عربية</td>
+      <td>رياضيات</td>
+      <td>علوم</td>
+      <td>اجتماعيات</td>
+      <td>إسلامية</td>
+    </tr>
+    <tr>
+      <td>الأحد</td>
+      <td>قرآن</td>
+      <td>لغة عربية</td>
+      <td>رياضيات</td>
+      <td>علوم</td>
+      <td>اجتماعيات</td>
+      <td>إسلامية</td>
+    </tr>
+    <tr>
+      <td>الاثنين</td>
+      <td>قرآن</td>
+      <td>لغة عربية</td>
+      <td>رياضيات</td>
+      <td>علوم</td>
+      <td>اجتماعيات</td>
+      <td>إسلامية</td>
+    </tr>
+    <tr>
+      <td>الثلاثاء</td>
+      <td>قرآن</td>
+      <td>لغة عربية</td>
+      <td>رياضيات</td>
+      <td>علوم</td>
+      <td>اجتماعيات</td>
+      <td>إسلامية</td>
+    </tr>
+    <tr>
+      <td>الأربعاء</td>
+      <td>قرآن</td>
+      <td>لغة عربية</td>
+      <td>رياضيات</td>
+      <td>علوم</td>
+      <td>اجتماعيات</td>
+      <td>إسلامية</td>
+    </tr>
+  </table>
+</main>
+
+<script>
+  function showTable() {
+    const name = document.getElementById("studentName").value.trim();
+    if (name === "") {
+      alert("الرجاء إدخال اسمك أولاً");
+      return;
+    }
+    document.getElementById("scheduleTable").style.display = "table";
+    document.getElementById("message").innerText = `مرحبًا ${name}، هذا هو جدولك لهذا الأسبوع.`;
+  }
+</script>
+
+</body>
+</html>

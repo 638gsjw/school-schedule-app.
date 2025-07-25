@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>جدول المعلمين وجدول الحصص الأسبوعي</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f8ff;
+    color: #003366;
+    padding: 20px;
+  }
+  h1, h2 {
+    text-align: center;
+    color: #005b96;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+  th, td {
+    border: 1px solid #005b96;
+    padding: 8px 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #005b96;
+    color: white;
+  }
+  caption {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #003366;
+  }
+  .day-header {
+    background-color: #d0e4ff;
+  }
+</style>
+</head>
+<body>
+
+<h1>جدول المعلمين والمواد حسب الصفوف</h1>
+
+<table>
+  <caption>المعلمين، الصفوف، والمواد</caption>
+  <thead>
+    <tr>
+      <th>اسم المعلم</th>
+      <th>الصفوف</th>
+      <th>المواد</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>عبد الملك عيد الرئيس</td>
+      <td>الأول الثانوي، الثاني الثانوي، الثالث الثانوي</td>
+      <td>القرآن الكريم، التربية الإسلامية، اللغة العربية، الرياضيات (الثالث الثانوي)</td>
+    </tr>
+    <tr>
+      <td>صلاح الدين</td>
+      <td>الأول الثانوي</td>
+      <td>المجتمع</td>
+    </tr>
+    <tr>
+      <td>منير</td>
+      <td>الرابع، الأول الثانوي</td>
+      <td>الاجتماعيات، الجغرافيا، التاريخ</td>
+    </tr>
+    <tr>
+      <td>فائد دبوان</td>
+      <td>الرابع، الخامس، السادس، السابع، الثامن، الأول الثانوي</td>
+      <td>الاجتماعيات، التاريخ</td>
+    </tr>
+    <tr>
+      <td>عناية</td>
+      <td>الأول الثانوي، الثاني الثانوي، الثالث الثانوي</td>
+      <td>الفيزياء، الأحياء، الرياضيات، الكيمياء</td>
+    </tr>
+    <tr>
+      <td>مهيوب حسان</td>
+      <td>الرابع، الخامس، السادس، السابع، الثامن، التاسع، الأول الثانوي، الثاني الثانوي</td>
+      <td>العلوم، الكيمياء</td>
+    </tr>
+    <tr>
+      <td>مختار حميد</td>
+      <td>السابع، الثامن، التاسع، الأول الثانوي</td>
+      <td>الرياضيات</td>
+    </tr>
+    <tr>
+      <td>سامي</td>
+      <td>الثامن، التاسع، الأول الثانوي، الثاني الثانوي، الثالث الثانوي</td>
+      <td>اللغة الإنجليزية</td>
+    </tr>
+    <tr>
+      <td>ابتهال</td>
+      <td>الرابع، الخامس، السابع</td>
+      <td>اللغة العربية، الإنجليزية</td>
+    </tr>
+    <tr>
+      <td>عبير عبد الباسط</td>
+      <td>السادس، السابع، الثامن</td>
+      <td>اللغة العربية، القرآن الكريم</td>
+    </tr>
+    <tr>
+      <td>عبد الله سعيد</td>
+      <td>السابع، الثامن، التاسع، الأول الثانوي، الثاني الثانوي، الثالث الثانوي</td>
+      <td>التربية الإسلامية، القرآن الكريم</td>
+    </tr>
+    <tr>
+      <td>رزاز</td>
+      <td>الرابع، الخامس، السادس</td>
+      <td>القرآن الكريم، التربية الإسلامية</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>جدول الحصص الأسبوعي حسب الصفوف</h1>
+
+<!-- صف الرابع -->
+<h2>الصف الرابع</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>عربي</td><td>اسلاميه</td><td>رياضيات</td><td>قران</td><td>عربي</td><td>قران</td></tr>
+    <tr><td class="day-header">الأحد</td><td>علوم</td><td>رياضيات</td><td>عربي</td><td>قران</td><td>اسلاميه</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>رياضيات</td><td>قران</td><td>عربي</td><td>علوم</td><td>عربي</td><td>قران</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>قران</td><td>رياضيات</td><td>عربي</td><td>علوم</td><td>اسلاميه</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>رياضيات</td><td>اجتماعيات</td><td>اسلاميه</td><td>علوم</td><td>عربي</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف الخامس -->
+<h2>الصف الخامس</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>اجتماعيات</td><td>رياضيات</td><td>علوم</td><td>عربي</td><td>قران</td><td>صحة</td></tr>
+    <tr><td class="day-header">الأحد</td><td>قران</td><td>عربي</td><td>رياضيات</td><td>اجتماعيات</td><td>عربي</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>عربي</td><td>رياضيات</td><td>قران</td><td>علوم</td><td>اسلاميه</td><td>اجتماعيات</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>علوم</td><td>اجتماعيات</td><td>قران</td><td>رياضيات</td><td>عربي</td><td></td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>رياضيات</td><td>اسلاميه</td><td>عربي</td><td>اجتماعيات</td><td>اسلاميه</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف السادس -->
+<h2>الصف السادس</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>رياضيات</td><td>عربي</td><td>قران</td><td>اجتماعيات</td><td>عربي</td><td>اسلاميه</td></tr>
+    <tr><td class="day-header">الأحد</td><td>عربي</td><td>علوم</td><td>رياضيات</td><td>عربي</td><td>اجتماعيات</td><td></td></tr>
+    <tr><td class="day-header">الاثنين</td><td>اسلاميه</td><td>علوم</td><td>اجتماعيات</td><td>عربي</td><td>اجتماعيات</td><td>عربي</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>اجتماعيات</td><td>قران</td><td>عربي</td><td>اجتماعيات</td><td>قران</td><td>اجتماعيات</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>قران</td><td>علوم</td><td>رياضيات</td><td>قران</td><td>اجتماعيات</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف السابع -->
+<h2>الصف السابع</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>اسلاميه</td><td>رياضيات</td><td>انجليزي</td><td>عربي</td><td>اجتماعيات</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأحد</td><td>عربي</td><td>اسلاميه</td><td>رياضيات</td><td>قران</td><td>عربي</td><td>اسلاميه</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>رياضيات</td><td>انجليزي</td><td>اجتماعيات</td><td>عربي</td><td>علوم</td><td></td></tr>
+    <tr><td class="day
+    <tbody>
+    <tr><td class="day-header">الثلاثاء</td><td>انجليزي</td><td>علوم</td><td>رياضيات</td><td>اجتماعيات</td><td>قران</td><td>اجتماعيات</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>علوم</td><td>انجليزي</td><td>رياضيات</td><td>عربي</td><td>اسلاميه</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف الثامن -->
+<h2>الصف الثامن</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>علوم</td><td>اجتماعيات</td><td>عربي</td><td>رياضيات</td><td>انجليزي</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأحد</td><td>رياضيات</td><td>اجتماعيات</td><td>علوم</td><td>انجليزي</td><td>اجتماعيات</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>اجتماعيات</td><td>انجليزي</td><td>رياضيات</td><td>اسلاميه</td><td>عربي</td><td>اجتماعيات</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>عربي</td><td>رياضيات</td><td>انجليزي</td><td>عربي</td><td>قران</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>اسلاميه</td><td>رياضيات</td><td>علوم</td><td>عربي</td><td>عربي</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف التاسع -->
+<h2>الصف التاسع</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>رياضيات</td><td>انجليزي</td><td>قران</td><td>علوم</td><td>اسلاميه</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأحد</td><td>عربي</td><td>رياضيات</td><td>انجليزي</td><td>علوم</td><td>اسلاميه</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>انجليزي</td><td>عربي</td><td>علوم</td><td>عربي</td><td>رياضيات</td><td>قران</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>رياضيات</td><td>اجتماعيات</td><td>عربي</td><td>اسلاميه</td><td>انجليزي</td><td>قران</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>عربي</td><td>اجتماعيات</td><td>قران</td><td>رياضيات</td><td>اجتماعيات</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف الأول الثانوي -->
+<h2>الصف الأول الثانوي</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>انجليزي</td><td>كيمياء</td><td>رياضيات</td><td>فيزياء</td><td>عربي</td><td>رياضيات</td></tr>
+    <tr><td class="day-header">الأحد</td><td>كيمياء</td><td>عربي</td><td>اسلاميه</td><td>رياضيات</td><td>عربي</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>فيزياء</td><td>رياضيات</td><td>انجليزي</td><td>عربي</td><td>قران</td><td>عربي</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>اسلاميه</td><td>انجليزي</td><td>اسلاميه</td><td>عربي</td><td>هيئة</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>رياضيات</td><td>تاريخ</td><td>جغرافيا</td><td>قران</td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف الثاني الثانوي -->
+<h2>الصف الثاني الثانوي</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>فيزياء</td><td>عربي</td><td>رياضيات</td><td>انجليزي</td><td>قران</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأحد</td><td>رياضيات</td><td>انجليزي</td><td>فيزياء</td><td>قران</td><td>انجليزي</td><td>اسلاميه</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>كيمياء</td><td>عربي</td><td>رياضيات</td><td>انجليزي</td><td>عربي</td><td>قران</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>رياضيات</td><td>اسلاميه</td><td>فيزياء</td><td>احياء</td><td>قران</td><td>انجليزي</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>رياضيات</td><td>اسلاميه</td><td>عربي</td><td>اسلاميه</td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- صف الثالث الثانوي -->
+<h2>الصف الثالث الثانوي</h2>
+<table>
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>الحصة 1</th>
+      <th>الحصة 2</th>
+      <th>الحصة 3</th>
+      <th>الحصة 4</th>
+      <th>الحصة 5</th>
+      <th>الحصة 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="day-header">السبت</td><td>رياضيات</td><td>فيزياء</td><td>انجليزي</td><td>اسلاميه</td><td>فيزياء</td><td>اسلاميه</td></tr>
+    <tr><td class="day-header">الأحد</td><td>عربي</td><td>فيزياء</td><td>قران</td><td>رياضيات</
+    <td>رياضيات</td><td>احياء</td><td>عربي</td></tr>
+    <tr><td class="day-header">الاثنين</td><td>عربي</td><td>اسلاميه</td><td>رياضيات</td><td>كيمياء</td><td>انجليزي</td><td>عربي</td></tr>
+    <tr><td class="day-header">الثلاثاء</td><td>انجليزي</td><td>رياضيات</td><td>قران</td><td>انجليزي</td><td>عربي</td><td>عربي</td></tr>
+    <tr><td class="day-header">الأربعاء</td><td>عربي</td><td>احياء</td><td>كيمياء</td><td>رياضيات</td><td>انجليزي</td><td></td></tr>
+  </tbody>
+</table>
+
+</body>
+</html>

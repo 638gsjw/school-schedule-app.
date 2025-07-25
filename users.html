@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختر نوع المستخدم</title>
+  <style>
+    body {
+      background: linear-gradient(to top, #007bff, #e0f0ff);
+      font-family: 'Cairo', sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #003366;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .user-btn {
+      display: block;
+      width: 300px;
+      margin: 20px auto;
+      padding: 15px;
+      font-size: 20px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    .user-btn:hover {
+      background-color: #003580;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔷 اختر نوع المستخدم للدخول</h1>
+
+  <button class="user-btn" onclick="window.location.href='student.html'">👨‍🎓 الدخول كطالب</button>
+  <button class="user-btn" onclick="window.location.href='teacher.html'">👨‍🏫 الدخول كمعلم</button>
+  <button class="user-btn" onclick="window.location.href='admin.html'">👨‍💼 الدخول كمدير</button>
+<button onclick="window.location.href='schedule.html'">📅 جدول الحصص الكامل</button>
+</body>
+</html>

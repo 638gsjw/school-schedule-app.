@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>جدول الحصص للطالب</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #e8f0fe;
+      margin: 20px;
+      color: #003366;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 5px;
+      border: 1px solid #003366;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 700px;
+    }
+    th, td {
+      border: 1px solid #003366;
+      padding: 8px;
+    }
+    th {
+      background-color: #003366;
+      color: white;
+    }
+    td {
+      background-color: #f0f7ff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>اختر صفك الدراسي لعرض جدول الحصص</h1>
+  
+  <select id="classSelect">
+    <option value="">-- اختر الصف --</option>
+  </select>
+  
+  <button onclick="showSchedule()">عرض الجدول</button>
+  
+  <div id="scheduleContainer"></div>
+  
+<script>
+  // بيانات المعلمين
+  const teachers = [
+    { id: 1, name: "رزاز" },
+    { id: 2, name: "منير" },
+    { id: 3, name: "ابتهال" },
+    { id: 4, name: "عبد الرقيب" },
+    { id: 5, name: "عبير" },
+    { id: 6, name: "عبد الله سعيد" },
+    { id: 7, name: "عناية" },
+    { id: 8, name: "صلاح" },
+    { id: 9, name: "مختار" },
+    { id: 10, name: "سامي" },
+    { id: 11, name: "عبد الملك" },
+    { id: 12, name: "مهيوب" },
+    { id: 13, name: "فائد دبوان" }
+  ];
+  
+  // الصفوف الدراسية
+  const classes = [
+    "الصف الرابع",
+    "الصف الخامس",
+    "الصف السادس",
+    "الصف السابع",
+    "الصف الثامن",
+    "الصف التاسع",
+    "الصف الأول الثانوي",
+    "الصف الثاني الثانوي",
+    "الصف الثالث الثانوي"
+  ];
+  
+  // المواد مع الصفوف والمعلم المسؤول
+  const subjects = [
+    { id: 1, name: "قرآن", classes: ["الصف الرابع", "الصف الخامس", "الصف السادس"], teacherId: 1 },
+    { id: 2, name: "إسلامية", classes: ["الصف الرابع", "الصف الخامس", "الصف السادس"], teacherId: 1 },
+    { id: 3, name: "لغة عربية", classes: ["الصف الرابع", "الصف الخامس", "الصف السادس"], teacherId: 3 },
+    { id: 4, name: "اجتماعيات", classes: ["الصف الرابع", "الصف الخامس"], teacherId: 2 },
+    { id: 5, name: "رياضيات", classes: ["الصف الرابع", "الصف الخامس", "الصف السادس"], teacherId: 4 },
+    
+    { id: 6, name: "قرآن", classes: ["الصف السابع"], teacherId: 5 },
+    { id: 7, name: "إنجليزي", classes: ["الصف السابع"], teacherId: 3 },
+    { id: 8, name: "إسلامية", classes: ["الصف السابع"], teacherId: 6 },
+    { id: 9, name: "علوم", classes: ["الصف السابع"], teacherId: 12 },
+    { id: 10, name: "رياضيات", classes: ["الصف السابع"], teacherId: 9 },
+    { id: 11, name: "لغة عربية", classes: ["الصف السابع"], teacherId: 4 },
+    { id: 12, name: "اجتماعيات", classes: ["الصف السابع"], teacherId: 13 },
+    
+    { id: 13, name: "قرآن", classes: ["الصف الثامن"], teacherId: 5 },
+    { id: 14, name: "إسلامية", classes: ["الصف الثامن"], teacherId: 6 },
+    { id: 15, name: "لغة عربية", classes: ["الصف الثامن"], teacherId: 5 },
+    { id: 16, name: "اجتماعيات", classes: ["الصف الثامن"], teacherId: 13 },
+    { id: 17, name: "علوم", classes: ["الصف الثامن"], teacherId: 12 },
+    { id: 18, name: "رياضيات", classes: ["الصف الثامن"], teacherId: 9 },
+    { id: 19, name: "إنجليزي", classes: ["الصف الثامن"], teacherId: 10 },
+    
+    { id: 20, name: "قرآن", classes: ["الصف التاسع"], teacherId: 6 },
+    { id: 21, name: "إسلامية", classes: ["الصف التاسع"], teacherId: 6 },
+    { id: 22, name: "لغة عربية", classes: ["الصف التاسع"], teacherId: 13 },
+    { id: 23, name: "اجتماعيات", classes: ["الصف التاسع"], teacherId: 2 },
+    { id: 24, name: "علوم", classes: ["الصف التاسع"], teacherId: 12 },
+    { id: 25, name: "رياضيات", classes: ["الصف التاسع"], teacherId: 9 },
+    { id: 26, name: "إنجليزي", classes: ["الصف التاسع"], teacherId: 10 },
+    
+    { id: 27, name: "قرآن", classes: ["الصف الأول الثانوي"], teacherId: 6 },
+    { id: 28, name: "إسلامية", classes: ["الصف الأول الثانوي"], teacherId: 6 },
+    { id: 29, name: "لغة عربية", classes: ["الصف الأول الثانوي"], teacherId: 11 },
+    { id: 30, name: "إنجليزي", classes: ["الصف الأول الثانوي"], teacherId: 10 },
+    { id: 31, name: "رياضيات", classes: ["الصف الأول الثانوي"], teacherId: 9 },
+    { id: 32, name: "فيزياء", classes: ["الصف الأول الثانوي"], teacherId: 7 },
+    { id: 33, name: "كيمياء", classes: ["الصف الأول الثانوي"], teacherId: 12 },
+    { id: 34, name: "أحياء", classes: ["الصف الأول الثانوي"], teacherId: 7 },
+    { id: 35, name: "مجتمع", classes: ["الصف الأول الثانوي"], teacherId: 8 },
+    { id: 36, name: "تاريخ", classes: ["الصف الأول الثانوي"], teacherId: 13 },
+    { id: 37, name: "جغرافيا", classes: ["الصف الأول الثانوي"], teacherId: 2 },
+    
+    // يمكنك إضافة المزيد حسب حاجتك
+  ];
+  
+  // جدول الحصص: (أيام الأسبوع: السبت - الأربعاء) 6 حصص يومياً
+  const schedule = [
+    {
+      class: "الصف الرابع",
+      day: "السبت",
+      periods: [
+        { period: 1, subjectId: 1 },
+        { period: 2, subjectId: 3 },
+        { period: 3, subjectId: 5 },
+        { period: 4, subjectId: 2 },
+        { period: 5, subjectId: 4 },
+        { period: 6, subjectId: 1 },
+      ],
+    },
+    {
+      class: "الصف الرابع",
+      day: "الأحد",
+      periods: [
+        { period: 1, subjectId: 3 },
+        { period: 2, subjectId: 5 },
+        { period: 3, subjectId: 4 },
+        { period: 4, subjectId: 1 },
+        { period: 5, subjectId: 2 },
+        { period: 6, subjectId: 3 },
+      ],
+    },
+    // ... يمكنك إضافة بقية الأيام والصفوف بنفس النمط
+    // هنا مثال ليوم الأحد صف السابع
+    {
+      class: "الصف السابع",
+      day: "الأحد",
+      periods: [
+        { period: 1, subjectId: 6 },
+        { period: 2, subjectId: 7 },
+        { period: 3, subjectId: 8 },
+        { period: 4, subjectId: 9 },
+        { period: 5, subjectId: 10 },
+        { period: 6, subjectId: 11 },
+      ],
+    }
+  ];
+  
+  // نعبئ قائمة الصفوف في القائمة المنسدلة
+  const classSelect = document.getElementById('classSelect');
+  classes.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c;
+    option.textContent = c;
+    classSelect.appendChild(option);
+  });
+  
+  function showSchedule() {
+    const selectedClass = classSelect.value;
+    if (!selectedClass) {
+      alert("يرجى اختيار الصف أولاً");
+      return;
+    }
+    
+    // نبحث جدول الحصص الخاص بالصف المختار لجميع الأيام
+    const days = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء"];
+    const scheduleContainer = document.getElementById('scheduleContainer');
+    scheduleContainer.innerHTML = ""; // تفريغ المحتوى القديم
+    
+    days.forEach(day => {
+      // نبحث عن جدول الحصص لهذا اليوم والصف
+      const daySchedule = schedule.find(s => s.class === selectedClass && s.day === day);
+      if (!daySchedule) {
+        // إذا لم يوجد جدول لهذا اليوم نعرض رسالة بسيطة
+        const noDataDiv = document.createElement('div');
+        noDataDiv.textContent = `لا يوجد جدول للصف ${selectedClass} ليوم ${day}`;
+        noDataDiv.style.margin = "15px";
+        scheduleContainer.appendChild(noDataDiv);
+        return;
+      }
+      
+      // نعرض عنوان اليوم
+      const dayTitle = document.createElement('h2');
+      dayTitle.textContent = `جدول يوم ${day}`;
+      scheduleContainer.appendChild(dayTitle);
+      
+      // ننشئ جدول HTML
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
+      
+      // رؤوس الأعمدة: الحصة والمواد والمعلم
+      const headerRow = document.createElement('tr');
+      ["الحصة", "المادة", "المعلم"].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+      
+      // نملأ بيانات الجدول
+      daySchedule.periods.forEach(p => {
+        const tr = document.createElement('tr');
+        
+        // رقم الحصة
+        const tdPeriod = document.createElement('td');
+        tdPeriod.textContent = p.period;
+        tr.appendChild(tdPeriod);
+        
+        // اسم المادة
+        const subject = subjects.find(sub => sub.id === p.subjectId);
+        const tdSubject = document.createElement('td');
+        tdSubject.textContent = subject ? subject.name : "غير معروف";
+        tr.appendChild(tdSubject);
+        
+        // اسم المعلم
+        const teacher = teachers.find(t => t.id === (subject ? subject.teacherId : null));
+        const tdTeacher = document.createElement('td');
+        tdTeacher.textContent = teacher ? teacher.name : "-";
+        tr.appendChild(tdTeacher);
+        
+        tbody.appendChild(tr);
+      });
+      
+      table.appendChild(tbody);
+      scheduleContainer.appendChild(table);
+    });
+  }
+</script>
+
+</body>
+</html>
